@@ -5,11 +5,13 @@ from PIL import Image
 from urllib.request import urlopen
 import io
 
-response = urlopen("https://dujk9xa5fr1wz.cloudfront.net/course/240x135/23887_a82a_4.jpg")
+response = urlopen(imageURL)
 file = io.BytesIO(response.read())
-image = Image.open(file).convert("RGBA") #<= convert to RGB from RGBA?
+image = Image.open(file).convert('RGBA')
 
-overlay = Image.open(file).convert("<mode>") #<= must match background image
+overlay = Image.open(pathToOverlay).convert('RGBA') #<= must be RGBA && match background
 
 output = Image.alpha_composite(image, overlay)
-output.save("path/filename.jpg")
+
+#output.save("images/example.jpg")
+#output.show()
